@@ -31,9 +31,6 @@ void childProcess(int childPID) {
 
 	pthread_t thread1, thread2, thread3, thread4;	//declare the 4 threads
 
-	int j;
-	for (j = 0; j<10;j++) {		//for loop for the 4 threads to run 10 times
-
 	pthread_create(&thread1, NULL, &workerthread1, NULL);		//create the 4 threads
 	pthread_create(&thread2, NULL, &workerthread2, NULL);
 	pthread_create(&thread3, NULL, &workerthread3, NULL);
@@ -43,13 +40,12 @@ void childProcess(int childPID) {
 	pthread_join(thread2, NULL);
 	pthread_join(thread3, NULL);
 	pthread_join(thread4, NULL);
-	}
 }
 
 //thread 1 function
 void *workerthread1(){
 	int count = 0;
-	while(count != 1) {		//print only once
+	while(count != 10) {		//print only once
 		sleep(1);			//the one second sleep before we lock
 		sem_wait(&sema);
 		count++;			//increment our count to 1 so we meet while condition
@@ -63,7 +59,7 @@ void *workerthread1(){
 //thread 2 function
 void *workerthread2() {
 	int count = 0;
-	while(count != 1) {
+	while(count != 10) {
 		sleep(1);
 		sem_wait(&sema);
 		count++;
@@ -77,7 +73,7 @@ void *workerthread2() {
 //thread 3 function
 void *workerthread3() {
 	int count = 0;
-	while(count != 1) {
+	while(count != 10) {
 		sleep(1);
 		sem_wait(&sema);
 		count++;
@@ -91,7 +87,7 @@ void *workerthread3() {
 //thread 4 function
 void *workerthread4() {
 	int count = 0;
-	while(count != 1) {
+	while(count != 10) {
 		sleep(1);
 		sem_wait(&sema);
 		count++;
